@@ -22,6 +22,8 @@ records workspace changes, and evaluates seven acceptance rules. The demo uses t
 run `scan_asset_usage`, write its JSON report, and reject an outside-write attempt.
 
 Repository: [MagentaDolphin/agent-mcp-gate](https://github.com/MagentaDolphin/agent-mcp-gate).
+CI workflow: [`ci/github-actions.yml`](ci/github-actions.yml) — install bubblewrap, run lint, tests and both
+sandboxed demo tasks; enable by moving it to `.github/workflows/` (requires a token with the `workflow` scope).
 
 ## Architecture
 
