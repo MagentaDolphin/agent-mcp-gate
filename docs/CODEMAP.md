@@ -15,6 +15,17 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) for boundaries and invariants.
 
 Package or module entry point; no defined symbols.
 
+## `src/agent_mcp_gate/demo.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `_SCAN_SCRIPT` | value | [src/agent_mcp_gate/demo.py:14](../src/agent_mcp_gate/demo.py#L14) |
+| `_OUTSIDE_SCRIPT` | value | [src/agent_mcp_gate/demo.py:24](../src/agent_mcp_gate/demo.py#L24) |
+| `_fixture` | function | [src/agent_mcp_gate/demo.py:32](../src/agent_mcp_gate/demo.py#L32) |
+| `_summary` | function | [src/agent_mcp_gate/demo.py:48](../src/agent_mcp_gate/demo.py#L48) |
+| `run_demo` | function | [src/agent_mcp_gate/demo.py:63](../src/agent_mcp_gate/demo.py#L63) |
+| `main` | function | [src/agent_mcp_gate/demo.py:107](../src/agent_mcp_gate/demo.py#L107) |
+
 ## `src/agent_mcp_gate/events.py`
 
 | Symbol | Kind | Address |
@@ -188,6 +199,16 @@ Package or module entry point; no defined symbols.
 | `test_invalid_or_noop_patch_leaves_original` | function | [tests/test_apply_scoped_patch.py:115](../tests/test_apply_scoped_patch.py#L115) |
 | `test_missing_workspace_is_fail_closed` | function | [tests/test_apply_scoped_patch.py:120](../tests/test_apply_scoped_patch.py#L120) |
 | `test_missing_file_directory_and_invalid_encoding` | function | [tests/test_apply_scoped_patch.py:125](../tests/test_apply_scoped_patch.py#L125) |
+
+## `tests/test_demo_e2e.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `_run_demo` | function | [tests/test_demo_e2e.py:9](../tests/test_demo_e2e.py#L9) |
+| `test_demo_e2e_accepts_scan_and_rejects_outside_write` | function | [tests/test_demo_e2e.py:24](../tests/test_demo_e2e.py#L24) |
+| `test_demo_e2e_repeated_workspace_keeps_fresh_reports` | function | [tests/test_demo_e2e.py:81](../tests/test_demo_e2e.py#L81) |
+| `test_demo_e2e_default_workspace` | function | [tests/test_demo_e2e.py:91](../tests/test_demo_e2e.py#L91) |
+| `test_demo_missing_sandbox_fails_closed` | function | [tests/test_demo_e2e.py:97](../tests/test_demo_e2e.py#L97) |
 
 ## `tests/test_events.py`
 

@@ -5,6 +5,29 @@ The MCP package has no SDK, network, LLM, or Python runtime dependencies.
 The sandbox layer requires the host bubblewrap binary. A separately callable
 task loop runs sandboxed commands and accepts them through machine checks.
 
+## Module map
+
+| Module | Purpose and calls |
+| --- | --- |
+| `demo.py` | CLI fixture orchestration; calls `loop.run_task` twice, streams events/verdicts, retains reports and host event logs. |
+| `loop.py` | Calls `sandbox.runner.run_in_sandbox`, supplements snapshots, calls `gate.evaluate`, and emits lifecycle events. |
+| `sandbox/policy.py`, `sandbox/runner.py` | Validate policy; build and execute bubblewrap, limit output/time, hash workspace files. |
+| `gate.py` | Evaluates G01–G07 against execution and filesystem evidence. |
+| `events.py` | Appends timestamped JSON Lines to host-selected destinations. |
+| `mcp/jsonrpc.py`, `mcp/server.py`, `mcp/tools.py` | Parse/dispatch stdio MCP, validate schemas, and call registered handlers directly. |
+| `tools/scan_asset_usage.py` | Reads JSON fixtures and traverses asset references. |
+| `tools/apply_scoped_patch.py` | Validates and atomically applies a patch to an existing workspace file. |
+
+`demo.py` creates three asset JSON files and one level in a temporary read-only root.
+It binds package source/runtime read-only, runs isolated Python with an empty environment
+allowlist, and writes a uniquely named JSON report inside the workspace. A second worker
+creates an in-scope artifact then attempts a write to read-only `/usr`; its failed exit must
+be rejected by G01. Both workers run every time. Zero exit requires scan acceptance and
+negative-run G01 refusal with G02 satisfied, so sandbox setup failure cannot pass the demo.
+Events are retained outside the workspace as `*-events.json` JSON Lines files and streamed
+to stdout; the standalone loop/MCP stdout invariants remain unchanged. Repeated demo calls
+create fresh fixtures/reports without deleting existing workspace files.
+
 ## Execution and boundaries
 
 `python -m agent_mcp_gate.mcp.server`, `python -m agent_mcp_gate.mcp`, and
@@ -103,8 +126,8 @@ project lifecycle extensions: shutdown replies with null and refuses further
 operations; exit or stdin EOF ends the loop. See
 [tool-contracts.md](tool-contracts.md) for supported params and detailed semantics.
 
-Protocol references: [MCP lifecycle](https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle)
-and [MCP tools](https://modelcontextprotocol.io/specification/2025-06-18/server/tools).
+Protocol references: [MCP lifecycle]( 53 )
+and [MCP tools]( 54 ).
 
 ## Navigation and verification
 
@@ -112,5 +135,6 @@ and [MCP tools](https://modelcontextprotocol.io/specification/2025-06-18/server/
 Regenerate it after structural changes with `python3 tools/gen_codemap.py`.
 The generator scans only the explicit source, test, and tooling directories.
 
-Validation: `.venv/bin/ruff check .`, `.venv/bin/pytest -q`, and a live
-`tools/list` request to `.venv/bin/python -m agent_mcp_gate.mcp.server`.
+Validation: `.venv/bin/ruff check .`, `.venv/bin/pytest -q -rs`, and
+`.venv/bin/python -m agent_mcp_gate.demo` (both sandboxed workers are mandatory).
+The [threat model](threat-model.md) maps boundary claims to named tests.

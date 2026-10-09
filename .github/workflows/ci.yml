@@ -14,10 +14,30 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install bubblewrap
-        run: sudo apt-get install -y bubblewrap
+        run: sudo apt-get update && sudo apt-get install -y bubblewrap
+      - name: Enable sandbox namespaces on Ubuntu runners
+        run: |
+          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
       - name: Install package and development tools
         run: pip install -e ".[dev]"
       - name: Lint
         run: ruff check .
       - name: Test
-        run: pytest -q
+        run: pytest -q -rs
+      - name: Run both sandboxed demo tasks
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: |
+          set -o pipefail
+          python -m agent_mcp_gate.demo | tee "${RUNNER_TEMP}/demo-output.jsonl"
+      - name: Upload gate events
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-events-python-${{ matrix.python-version }}
+          path: |
+            ${{ runner.temp }}/demo-output.jsonl
+            ${{ runner.temp }}/agent-mcp-gate-events-*/*.json
+          if-no-files-found: error
