@@ -1,8 +1,9 @@
 # Architecture
 
 The package has a standard-library MCP server and two local tool handlers.
-There are no SDK, network, LLM, or runtime dependency requirements. Sandbox,
-agent-loop, and gate layers are outside this implementation.
+The MCP package has no SDK, network, LLM, or Python runtime dependencies.
+The separate sandbox layer requires the host bubblewrap binary. Agent-loop and
+gate integration remain outside this implementation.
 
 ## Execution and boundaries
 
@@ -39,6 +40,28 @@ supply the documented argument types.
 - Patching validates all hunks and coordinates before mutation, performs an
   atomic replacement, and reports zero applied hunks on any refusal. File modes
   are preserved; temporary files are removed. Concurrent edits are not merged.
+
+## Sandbox boundary
+
+- `sandbox/policy.py:SandboxPolicy` validates JSON/dict policies and records
+  filesystem binds, environment names, timeout, output budget and tmpfs capacity.
+- `sandbox/runner.py:build_bwrap_argv` constructs namespace and mount arguments;
+  `run_in_sandbox` resolves bwrap, captures bounded output, kills timed-out process
+  groups, and returns before/after SHA-256 maps of regular workspace files.
+- Execution always uses bwrap. Missing or unstartable binaries, unreadable policies
+  and unsupported network requests prevent launch. Isolation setup failures return
+  a nonzero result; no branch runs the task without isolation.
+- Only the workspace is bound writable; `/tmp` is a private size-limited tmpfs.
+  Configured roots are read-only, other host paths are absent, host environment is
+  cleared before explicit allowlisted values are restored, and networking is
+  always isolated. Workspace hard links and overlapping binds are refused.
+- Snapshot traversal does not follow symlinks. Captured stdout/stderr share one
+  byte budget; excess output is drained. Timeouts report `rc=-9`, kill descendants
+  in the PID namespace, and reap bwrap. Workspace writes are not rolled back.
+
+See [sandbox.md](sandbox.md) for the policy schema, command layout, failure
+semantics and named negative tests. This boundary is independently callable;
+MCP tools do not yet invoke it, and the gate will consume `RunResult` in MC-004.
 
 ## Protocol scope
 

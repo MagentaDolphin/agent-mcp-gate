@@ -70,6 +70,39 @@ Package or module entry point; no defined symbols.
 | `ToolSpec.definition` | function | [src/agent_mcp_gate/mcp/tools.py:76](../src/agent_mcp_gate/mcp/tools.py#L76) |
 | `build_registry` | function | [src/agent_mcp_gate/mcp/tools.py:85](../src/agent_mcp_gate/mcp/tools.py#L85) |
 
+## `src/agent_mcp_gate/sandbox/__init__.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `__all__` | value | [src/agent_mcp_gate/sandbox/__init__.py:6](../src/agent_mcp_gate/sandbox/__init__.py#L6) |
+
+## `src/agent_mcp_gate/sandbox/policy.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `DEFAULT_READ_ONLY_ROOTS` | value | [src/agent_mcp_gate/sandbox/policy.py:9](../src/agent_mcp_gate/sandbox/policy.py#L9) |
+| `DEFAULT_ENV_ALLOWLIST` | value | [src/agent_mcp_gate/sandbox/policy.py:10](../src/agent_mcp_gate/sandbox/policy.py#L10) |
+| `SandboxPolicyError` | class | [src/agent_mcp_gate/sandbox/policy.py:13](../src/agent_mcp_gate/sandbox/policy.py#L13) |
+| `SandboxUnavailable` | class | [src/agent_mcp_gate/sandbox/policy.py:17](../src/agent_mcp_gate/sandbox/policy.py#L17) |
+| `_string_list` | function | [src/agent_mcp_gate/sandbox/policy.py:21](../src/agent_mcp_gate/sandbox/policy.py#L21) |
+| `SandboxPolicy` | class | [src/agent_mcp_gate/sandbox/policy.py:30](../src/agent_mcp_gate/sandbox/policy.py#L30) |
+| `SandboxPolicy.__post_init__` | function | [src/agent_mcp_gate/sandbox/policy.py:39](../src/agent_mcp_gate/sandbox/policy.py#L39) |
+| `SandboxPolicy.from_dict` | function | [src/agent_mcp_gate/sandbox/policy.py:93](../src/agent_mcp_gate/sandbox/policy.py#L93) |
+| `SandboxPolicy.from_json` | function | [src/agent_mcp_gate/sandbox/policy.py:107](../src/agent_mcp_gate/sandbox/policy.py#L107) |
+| `SandboxPolicy.snapshot` | function | [src/agent_mcp_gate/sandbox/policy.py:115](../src/agent_mcp_gate/sandbox/policy.py#L115) |
+
+## `src/agent_mcp_gate/sandbox/runner.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `RunResult` | class | [src/agent_mcp_gate/sandbox/runner.py:19](../src/agent_mcp_gate/sandbox/runner.py#L19) |
+| `build_bwrap_argv` | function | [src/agent_mcp_gate/sandbox/runner.py:31](../src/agent_mcp_gate/sandbox/runner.py#L31) |
+| `_workspace_snapshot` | function | [src/agent_mcp_gate/sandbox/runner.py:60](../src/agent_mcp_gate/sandbox/runner.py#L60) |
+| `_workspace_snapshot.fail` | function | [src/agent_mcp_gate/sandbox/runner.py:64](../src/agent_mcp_gate/sandbox/runner.py#L64) |
+| `_kill_process_group` | function | [src/agent_mcp_gate/sandbox/runner.py:92](../src/agent_mcp_gate/sandbox/runner.py#L92) |
+| `_capture` | function | [src/agent_mcp_gate/sandbox/runner.py:99](../src/agent_mcp_gate/sandbox/runner.py#L99) |
+| `run_in_sandbox` | function | [src/agent_mcp_gate/sandbox/runner.py:132](../src/agent_mcp_gate/sandbox/runner.py#L132) |
+
 ## `src/agent_mcp_gate/tools/__init__.py`
 
 Package or module entry point; no defined symbols.
@@ -137,6 +170,45 @@ Package or module entry point; no defined symbols.
 | Symbol | Kind | Address |
 | --- | --- | --- |
 | `test_package_import_and_version` | function | [tests/test_package.py:4](../tests/test_package.py#L4) |
+
+## `tests/test_sandbox_policy.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `test_sandbox_policy_defaults_and_json` | function | [tests/test_sandbox_policy.py:16](../tests/test_sandbox_policy.py#L16) |
+| `test_sandbox_policy_missing_or_invalid_workspace` | function | [tests/test_sandbox_policy.py:32](../tests/test_sandbox_policy.py#L32) |
+| `test_sandbox_policy_broken_json` | function | [tests/test_sandbox_policy.py:38](../tests/test_sandbox_policy.py#L38) |
+| `test_sandbox_policy_unreadable_json` | function | [tests/test_sandbox_policy.py:45](../tests/test_sandbox_policy.py#L45) |
+| `test_sandbox_policy_invalid_fields` | function | [tests/test_sandbox_policy.py:71](../tests/test_sandbox_policy.py#L71) |
+| `test_sandbox_policy_overlapping_bind_is_rejected` | function | [tests/test_sandbox_policy.py:76](../tests/test_sandbox_policy.py#L76) |
+| `test_sandbox_policy_network_true_is_recorded_but_execution_rejected` | function | [tests/test_sandbox_policy.py:85](../tests/test_sandbox_policy.py#L85) |
+| `test_sandbox_policy_missing_bwrap_is_fail_closed` | function | [tests/test_sandbox_policy.py:95](../tests/test_sandbox_policy.py#L95) |
+| `test_sandbox_policy_deleted_workspace_is_rejected` | function | [tests/test_sandbox_policy.py:102](../tests/test_sandbox_policy.py#L102) |
+| `test_sandbox_policy_argv_and_bind_order` | function | [tests/test_sandbox_policy.py:111](../tests/test_sandbox_policy.py#L111) |
+
+## `tests/test_sandbox_runner.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `PYTHON` | value | [tests/test_sandbox_runner.py:13](../tests/test_sandbox_runner.py#L13) |
+| `sandbox` | function | [tests/test_sandbox_runner.py:17](../tests/test_sandbox_runner.py#L17) |
+| `_host_snapshot` | function | [tests/test_sandbox_runner.py:31](../tests/test_sandbox_runner.py#L31) |
+| `_run` | function | [tests/test_sandbox_runner.py:35](../tests/test_sandbox_runner.py#L35) |
+| `test_sandbox_runner_reads_and_writes_workspace` | function | [tests/test_sandbox_runner.py:39](../tests/test_sandbox_runner.py#L39) |
+| `test_sandbox_negative_tmp_write_is_private` | function | [tests/test_sandbox_runner.py:61](../tests/test_sandbox_runner.py#L61) |
+| `test_sandbox_negative_absolute_write_outside_workspace` | function | [tests/test_sandbox_runner.py:74](../tests/test_sandbox_runner.py#L74) |
+| `test_sandbox_negative_symlink_escape` | function | [tests/test_sandbox_runner.py:85](../tests/test_sandbox_runner.py#L85) |
+| `test_sandbox_negative_network_connect` | function | [tests/test_sandbox_runner.py:98](../tests/test_sandbox_runner.py#L98) |
+| `test_sandbox_negative_read_unbound_host_file` | function | [tests/test_sandbox_runner.py:119](../tests/test_sandbox_runner.py#L119) |
+| `test_sandbox_negative_host_environment_leak` | function | [tests/test_sandbox_runner.py:130](../tests/test_sandbox_runner.py#L130) |
+| `test_sandbox_negative_read_only_root_write` | function | [tests/test_sandbox_runner.py:145](../tests/test_sandbox_runner.py#L145) |
+| `test_sandbox_negative_hard_link_is_rejected` | function | [tests/test_sandbox_runner.py:157](../tests/test_sandbox_runner.py#L157) |
+| `test_sandbox_runner_timeout_kills_process_and_descendant` | function | [tests/test_sandbox_runner.py:166](../tests/test_sandbox_runner.py#L166) |
+| `test_sandbox_runner_timeout_kills_process_and_descendant.record_process` | function | [tests/test_sandbox_runner.py:174](../tests/test_sandbox_runner.py#L174) |
+| `test_sandbox_runner_output_is_bounded_and_drained` | function | [tests/test_sandbox_runner.py:209](../tests/test_sandbox_runner.py#L209) |
+| `test_sandbox_runner_private_tmpfs_has_size_limit` | function | [tests/test_sandbox_runner.py:218](../tests/test_sandbox_runner.py#L218) |
+| `test_sandbox_runner_nonzero_exit_is_preserved` | function | [tests/test_sandbox_runner.py:230](../tests/test_sandbox_runner.py#L230) |
+| `test_sandbox_runner_custom_read_only_root_below_tmp` | function | [tests/test_sandbox_runner.py:237](../tests/test_sandbox_runner.py#L237) |
 
 ## `tests/test_scan_asset_usage.py`
 
