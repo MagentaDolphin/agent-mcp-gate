@@ -15,6 +15,49 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) for boundaries and invariants.
 
 Package or module entry point; no defined symbols.
 
+## `src/agent_mcp_gate/events.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `EVENTS` | value | [src/agent_mcp_gate/events.py:9](../src/agent_mcp_gate/events.py#L9) |
+| `EventEmitter` | class | [src/agent_mcp_gate/events.py:24](../src/agent_mcp_gate/events.py#L24) |
+| `EventEmitter.emit` | function | [src/agent_mcp_gate/events.py:28](../src/agent_mcp_gate/events.py#L28) |
+| `emit` | function | [src/agent_mcp_gate/events.py:44](../src/agent_mcp_gate/events.py#L44) |
+
+## `src/agent_mcp_gate/gate.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `SANITARY_BLOCKED_DIRECTORIES` | value | [src/agent_mcp_gate/gate.py:14](../src/agent_mcp_gate/gate.py#L14) |
+| `SANITARY_BLOCKED_PATTERNS` | value | [src/agent_mcp_gate/gate.py:15](../src/agent_mcp_gate/gate.py#L15) |
+| `NETWORK_INDICATORS` | value | [src/agent_mcp_gate/gate.py:39](../src/agent_mcp_gate/gate.py#L39) |
+| `GateRule` | class | [src/agent_mcp_gate/gate.py:49](../src/agent_mcp_gate/gate.py#L49) |
+| `GateVerdict` | class | [src/agent_mcp_gate/gate.py:56](../src/agent_mcp_gate/gate.py#L56) |
+| `_path` | function | [src/agent_mcp_gate/gate.py:62](../src/agent_mcp_gate/gate.py#L62) |
+| `_changes` | function | [src/agent_mcp_gate/gate.py:67](../src/agent_mcp_gate/gate.py#L67) |
+| `new_artifacts` | function | [src/agent_mcp_gate/gate.py:74](../src/agent_mcp_gate/gate.py#L74) |
+| `_check_g01` | function | [src/agent_mcp_gate/gate.py:90](../src/agent_mcp_gate/gate.py#L90) |
+| `_check_g02` | function | [src/agent_mcp_gate/gate.py:95](../src/agent_mcp_gate/gate.py#L95) |
+| `_check_g03` | function | [src/agent_mcp_gate/gate.py:100](../src/agent_mcp_gate/gate.py#L100) |
+| `_raise_walk_error` | function | [src/agent_mcp_gate/gate.py:117](../src/agent_mcp_gate/gate.py#L117) |
+| `_check_g04` | function | [src/agent_mcp_gate/gate.py:121](../src/agent_mcp_gate/gate.py#L121) |
+| `_check_g05` | function | [src/agent_mcp_gate/gate.py:142](../src/agent_mcp_gate/gate.py#L142) |
+| `_check_g06` | function | [src/agent_mcp_gate/gate.py:147](../src/agent_mcp_gate/gate.py#L147) |
+| `_check_g07` | function | [src/agent_mcp_gate/gate.py:156](../src/agent_mcp_gate/gate.py#L156) |
+| `RULES` | value | [src/agent_mcp_gate/gate.py:171](../src/agent_mcp_gate/gate.py#L171) |
+| `evaluate` | function | [src/agent_mcp_gate/gate.py:182](../src/agent_mcp_gate/gate.py#L182) |
+
+## `src/agent_mcp_gate/loop.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `TaskOutcome` | class | [src/agent_mcp_gate/loop.py:17](../src/agent_mcp_gate/loop.py#L17) |
+| `_tree_metadata` | function | [src/agent_mcp_gate/loop.py:24](../src/agent_mcp_gate/loop.py#L24) |
+| `_tree_metadata.fail` | function | [src/agent_mcp_gate/loop.py:28](../src/agent_mcp_gate/loop.py#L28) |
+| `_merge_snapshot` | function | [src/agent_mcp_gate/loop.py:44](../src/agent_mcp_gate/loop.py#L44) |
+| `_refuse_artifact` | function | [src/agent_mcp_gate/loop.py:48](../src/agent_mcp_gate/loop.py#L48) |
+| `run_task` | function | [src/agent_mcp_gate/loop.py:61](../src/agent_mcp_gate/loop.py#L61) |
+
 ## `src/agent_mcp_gate/mcp/__init__.py`
 
 Package or module entry point; no defined symbols.
@@ -146,6 +189,39 @@ Package or module entry point; no defined symbols.
 | `test_missing_workspace_is_fail_closed` | function | [tests/test_apply_scoped_patch.py:120](../tests/test_apply_scoped_patch.py#L120) |
 | `test_missing_file_directory_and_invalid_encoding` | function | [tests/test_apply_scoped_patch.py:125](../tests/test_apply_scoped_patch.py#L125) |
 
+## `tests/test_events.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `test_emit_selected_destinations_are_json_lines` | function | [tests/test_events.py:12](../tests/test_events.py#L12) |
+| `test_emitter_appends_and_escapes_field_newlines` | function | [tests/test_events.py:29](../tests/test_events.py#L29) |
+| `test_invalid_event_fields_never_write_partial_json` | function | [tests/test_events.py:40](../tests/test_events.py#L40) |
+
+## `tests/test_gate.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `successful_run` | function | [tests/test_gate.py:13](../tests/test_gate.py#L13) |
+| `assert_only_refusal` | function | [tests/test_gate.py:32](../tests/test_gate.py#L32) |
+| `test_all_rules_accept_factual_artifact` | function | [tests/test_gate.py:39](../tests/test_gate.py#L39) |
+| `test_g01_rejects_failed_or_timed_out_run` | function | [tests/test_gate.py:49](../tests/test_gate.py#L49) |
+| `test_g02_self_report_is_not_new_nonempty_artifact` | function | [tests/test_gate.py:55](../tests/test_gate.py#L55) |
+| `test_g03_rejects_every_known_outside_change` | function | [tests/test_gate.py:70](../tests/test_gate.py#L70) |
+| `test_g04_detects_new_escaping_links_omitted_by_runner` | function | [tests/test_gate.py:94](../tests/test_gate.py#L94) |
+| `test_g05_rejects_truncated_output` | function | [tests/test_gate.py:107](../tests/test_gate.py#L107) |
+| `test_g06_rejects_network_policy_or_stderr_evidence` | function | [tests/test_gate.py:127](../tests/test_gate.py#L127) |
+| `test_g07_rejects_binary_build_debris_and_service_paths` | function | [tests/test_gate.py:149](../tests/test_gate.py#L149) |
+| `test_g07_covers_deletions_and_announced_paths` | function | [tests/test_gate.py:159](../tests/test_gate.py#L159) |
+| `test_one_failed_rule_still_runs_all_seven` | function | [tests/test_gate.py:169](../tests/test_gate.py#L169) |
+| `test_internal_error_is_fail_closed_for_each_rule` | function | [tests/test_gate.py:177](../tests/test_gate.py#L177) |
+| `test_internal_error_is_fail_closed_for_each_rule.broken` | function | [tests/test_gate.py:181](../tests/test_gate.py#L181) |
+| `test_bad_extra_paths_cannot_bypass_checks` | function | [tests/test_gate.py:195](../tests/test_gate.py#L195) |
+| `test_bad_extra_paths_cannot_bypass_checks.broken_paths` | function | [tests/test_gate.py:198](../tests/test_gate.py#L198) |
+| `test_multiple_refusals_are_all_reported` | function | [tests/test_gate.py:208](../tests/test_gate.py#L208) |
+| `test_inside_symlinks_and_unmodified_outside_entries_are_allowed` | function | [tests/test_gate.py:215](../tests/test_gate.py#L215) |
+| `test_extra_path_cannot_fabricate_artifact` | function | [tests/test_gate.py:228](../tests/test_gate.py#L228) |
+| `test_g03_rejects_file_beneath_escaping_directory_link` | function | [tests/test_gate.py:234](../tests/test_gate.py#L234) |
+
 ## `tests/test_jsonrpc.py`
 
 | Symbol | Kind | Address |
@@ -153,6 +229,30 @@ Package or module entry point; no defined symbols.
 | `test_round_trip` | function | [tests/test_jsonrpc.py:29](../tests/test_jsonrpc.py#L29) |
 | `test_invalid_messages` | function | [tests/test_jsonrpc.py:51](../tests/test_jsonrpc.py#L51) |
 | `test_error_data_optional_and_request_id_preserved` | function | [tests/test_jsonrpc.py:57](../tests/test_jsonrpc.py#L57) |
+
+## `tests/test_loop.py`
+
+| Symbol | Kind | Address |
+| --- | --- | --- |
+| `policy` | function | [tests/test_loop.py:14](../tests/test_loop.py#L14) |
+| `live_policy` | function | [tests/test_loop.py:21](../tests/test_loop.py#L21) |
+| `read_events` | function | [tests/test_loop.py:30](../tests/test_loop.py#L30) |
+| `test_live_task_events_file_and_accepted_artifact` | function | [tests/test_loop.py:38](../tests/test_loop.py#L38) |
+| `test_live_rejection_preserves_workspace_and_artifact` | function | [tests/test_loop.py:69](../tests/test_loop.py#L69) |
+| `test_live_new_directory_link_is_part_of_tree_and_refused` | function | [tests/test_loop.py:90](../tests/test_loop.py#L90) |
+| `test_live_new_service_directory_is_refused` | function | [tests/test_loop.py:108](../tests/test_loop.py#L108) |
+| `test_live_existing_link_is_not_mistaken_for_new_link` | function | [tests/test_loop.py:122](../tests/test_loop.py#L122) |
+| `test_live_events_inside_workspace_do_not_satisfy_artifact_rule` | function | [tests/test_loop.py:132](../tests/test_loop.py#L132) |
+| `test_live_artifact_glob_requires_a_matching_new_artifact` | function | [tests/test_loop.py:140](../tests/test_loop.py#L140) |
+| `test_live_modified_service_file_is_refused` | function | [tests/test_loop.py:153](../tests/test_loop.py#L153) |
+| `test_unavailable_sandbox_records_rejection_without_fallback` | function | [tests/test_loop.py:170](../tests/test_loop.py#L170) |
+| `test_unavailable_sandbox_records_rejection_without_fallback.unavailable` | function | [tests/test_loop.py:173](../tests/test_loop.py#L173) |
+| `test_loop_metadata_detects_mode_changes` | function | [tests/test_loop.py:190](../tests/test_loop.py#L190) |
+| `test_loop_metadata_detects_mode_changes.fake_runner` | function | [tests/test_loop.py:195](../tests/test_loop.py#L195) |
+| `test_live_deleted_service_directory_is_refused` | function | [tests/test_loop.py:216](../tests/test_loop.py#L216) |
+| `test_snapshot_error_after_execution_cannot_accept` | function | [tests/test_loop.py:231](../tests/test_loop.py#L231) |
+| `test_snapshot_error_after_execution_cannot_accept.unreliable` | function | [tests/test_loop.py:235](../tests/test_loop.py#L235) |
+| `test_snapshot_error_after_execution_cannot_accept.fake_runner` | function | [tests/test_loop.py:241](../tests/test_loop.py#L241) |
 
 ## `tests/test_mcp_server.py`
 

@@ -2,8 +2,8 @@
 
 The package has a standard-library MCP server and two local tool handlers.
 The MCP package has no SDK, network, LLM, or Python runtime dependencies.
-The separate sandbox layer requires the host bubblewrap binary. Agent-loop and
-gate integration remain outside this implementation.
+The sandbox layer requires the host bubblewrap binary. A separately callable
+task loop runs sandboxed commands and accepts them through machine checks.
 
 ## Execution and boundaries
 
@@ -61,7 +61,33 @@ supply the documented argument types.
 
 See [sandbox.md](sandbox.md) for the policy schema, command layout, failure
 semantics and named negative tests. This boundary is independently callable;
-MCP tools do not yet invoke it, and the gate will consume `RunResult` in MC-004.
+MCP tools do not yet invoke it; the task loop and acceptance gate consume its
+`RunResult` without changing sandbox execution.
+
+## Acceptance and events
+
+- `gate.py:GateRule` defines G01–G07; `evaluate` runs every rule and returns a
+  `GateVerdict` containing structured checks and refusal reasons. Check exceptions
+  and malformed check returns fail closed with `internal_error`.
+- Acceptance requires a successful, untimed-out run, a new nonempty regular file,
+  changes inside the workspace, no new escaping symlinks, complete output,
+  disabled network/no stderr indicators, and sanitary changed paths. A caller's
+  `extra_paths` participates in boundary and sanitation checks, but cannot replace
+  snapshot evidence for a new artifact.
+- `loop.py:run_task` invokes the unchanged sandbox runner. Descriptor-based tree
+  metadata supplements its file hashes with modes, directories and symlinks, so
+  those changes are visible and preexisting links are distinguished from new ones.
+  Optional artifact glob matching constrains G02. Setup/snapshot errors refuse
+  acceptance; there is no unsandboxed fallback or cleanup of rejected workspaces.
+- `events.py:EventEmitter` and `emit` append UTC-timestamped JSON Lines to the
+  caller's file and/or stderr. Stdout remains reserved for MCP responses. The
+  task loop records lifecycle, artifacts, all checks, verdict and final decision.
+  Serialization/write errors propagate. Logs are initialized before snapshots
+  and do not supply artifact evidence; host-side logs should be outside task scope.
+- These APIs remain independently callable; the MCP handlers do not yet invoke
+  the task loop. The gate judges observable execution evidence, not task meaning.
+
+See [acceptance.md](acceptance.md) for rule details, named tests and limitations.
 
 ## Protocol scope
 
